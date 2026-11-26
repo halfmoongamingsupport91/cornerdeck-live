@@ -20,7 +20,7 @@ jobs:
       - name: Download release asset
         run: |
           mkdir site
-          curl -fL -o web.zip https://github.com/halfmoongamingsupport91/cornerdeck-live/releases/download/b69/cornerdeck-live-b69.zip
+          curl -fL -o web.zip https://github.com/halfmoongamingsupport91/cornerdeck-live/releases/download/b72/cornerdeck-live-b72.zip
           unzip -q web.zip -d site
           touch site/.nojekyll
           test "$(find site -type f ! -name .nojekyll | wc -l)" = "437"

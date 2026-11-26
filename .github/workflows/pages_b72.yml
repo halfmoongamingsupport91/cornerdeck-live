@@ -1,8 +1,6 @@
-name: Deploy Corner Deck Live
+name: Deploy Corner Deck Live (manual copy)
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 permissions:
   contents: read
   pages: write
