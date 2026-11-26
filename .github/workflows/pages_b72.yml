@@ -1,0 +1,33 @@
+name: Deploy Corner Deck Live
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download release asset
+        run: |
+          mkdir site
+          curl -fL -o web.zip https://github.com/halfmoongamingsupport91/cornerdeck-live/releases/download/b72/cornerdeck-live-b72.zip
+          unzip -q web.zip -d site
+          touch site/.nojekyll
+          test "$(find site -type f ! -name .nojekyll | wc -l)" = "437"
+          ls -la site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
